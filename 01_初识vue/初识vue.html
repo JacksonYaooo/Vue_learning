@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>初识vue</title>
+    <!-- 引入vue -->
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+      1 想让Vue工作，必须创建一个Vue实例，且传入一个配置对象；
+      2 root容器里的代码依然符合HTML规范；
+      3 root容器里的代码被称为【Vue模板】
+      4 双重花括号里写js表达式，且能自动读取到data中的所有属性
+      5 真实开发中只有一个Vue实例，并且搭配组件一起使用
+
+      ! 区分js表达式与js代码：
+        1 表达式：一个表达式会生成一个值，可以放在任何一个需要值的地方：
+          （1） a
+          （2） a+b
+          （3） demo(1)
+          （4） x === y ? 'a' : 'b'
+        2 js代码(语句)：
+          （1） if(){}
+          （2） for(){}  
+     -->
+
+    <!-- 准备好一个容器 -->
+    <div id="root">
+      <h1>Hello,{{name}},{{address.toUpperCase()}}</h1>
+      <!-- #.toUpoperCase()是使#的所有字母变大写 -->
+    </div>
+  </body>
+  <script>
+    Vue.config.productionTip = false;
+    // 阻止开启Vue时产生生产提示
+
+    // 创建Vue实例
+    new Vue({
+      el: "#root", //el用于当前Vue实例锁定容器(一一对应)，值通常为css选择器字符串
+      data: {
+        // data中用于存储数据，数据供el指定的容器使用，值暂时先写成一个对象。
+        name: "hmy",
+        address: "xvchang",
+      },
+    });
+  </script>
+</html>
