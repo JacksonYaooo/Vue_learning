@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>el与data的两种写法</title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h1>你好，{{name}}</h1>
+    </div>
+  </body>
+
+  <script>
+    Vue.config.productionTip = false;
+
+    /*
+      const v = new Vue({
+        // el:'#root',  // 第一种写法
+        data: {  // data的第一种写法：对象式
+          name: "hmy",
+        },
+      });
+      console.log(v);
+
+      setTimeout(() => {
+        v.$mount("#root"); // 实例绑定容器另一种写法,更灵活（例如定时器应用）
+      }, 1000);
+    */
+
+    // data的第二种写法：函数式（非箭头函数），Vue组件中必须使用麻烦的函数式
+    // 因为普通函数的this是Vue实例，而箭头函数没有自己的this，所以其this是Window
+    new Vue({
+      el:'#root',
+      data:function(){   // 可简写为data(){###}
+        console.log(this);
+        return{  // 必须在返回值中写出属性
+          name:'hmy'
+        }
+      }
+    })
+  </script>
+</html>
