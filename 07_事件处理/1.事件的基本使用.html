@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件的回调写入methods中</title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>欢迎来到{{address}}</h2>
+      <!-- <button v-on:click="showInfo">点我获取提示</button> -->
+      <button @click="showInfo($event,2001062028)">点我获取提示</button>
+      <!-- v-on:  简写为  @         传参时给关键词加$ -->
+    </div>
+  </body>
+  <script>
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+      el: "#root",
+      data() {
+        return {
+          address: "hhstu",
+        };
+      },
+      methods: { // 被Vue管理的函数不要写成箭头函数,方法不做数据代理
+        showInfo(event,num){
+          // console.log(event.target.innerText);
+          console.log(event,num);
+          // console.log(this); // 此处的this是vm
+          alert('Hello hmy')
+        }
+      },
+    });
+  </script>
+</html>

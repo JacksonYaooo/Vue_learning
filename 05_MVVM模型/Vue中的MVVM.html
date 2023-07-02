@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>理解MVVM模型</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h1>姓名:{{name}}</h1>
+    <h1>地址：{{address}}</h1>
+    <h1>测试一下1:{{1+1}}</h1>
+    <h1>测试一下2:{{$options}}</h1>
+    <!-- Vue实例(vm)中的所有属性(包括vm的原型属性)，都能直接被Vue模型使用 -->
+  </div>
+  
+</body>
+<script>
+  Vue.config.productionTip = false
+  const vm = new Vue({
+    el:'#root',
+    data(){
+      return{
+        name:'hmy',
+        address:'xvchang',    
+      }
+    }
+  })
+  console.log(vm);
+</script>
+</html>

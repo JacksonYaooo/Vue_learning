@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件修饰符</title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+      Vue中的事件修饰符：
+        .prevent：阻止默认事件发生,相当于e.preventDefault();
+        .stop：阻止事件冒泡,相当于e.stopPropagation();
+        .once：事件只触发一次
+
+        .capture：使用事件的捕获模式
+        .self：只有event.target是当前操作的元素时，才触发事件
+        .passive：事件的默认行为立即执行，无需等待事件回调执行完毕
+   -->
+    <div id="root">
+      <h2>欢迎来到{{address}}</h2>
+      <a href="http://www.baidu.com" @click.prevent="showInfo">点我提示</a>
+    </div>
+  </body>
+  <script>
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+      el: "#root",
+      data() {
+        return {
+          address: "hhstu",
+        };
+      },
+      methods: {
+        showInfo(e) {
+          // e.preventDefault();  // 阻止默认事件的写法，可省略，在事件click后添加.prevent
+          alert("你好hmy");
+        },
+      },
+    });
+  </script>
+</html>
