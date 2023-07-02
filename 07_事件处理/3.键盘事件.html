@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>键盘事件</title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        1.Vue中常用的按键别名：
+            回车：enter
+            删除：delete（捕获删除以及退格键）
+            退出：esc
+            空格：space
+            换行：tab（特殊按键，必须配合keydown使用，
+                因为keyup奏效前按下tab的一瞬间系统会自动移走焦点，无法实现在输入框中tab按键抬起动作）
+            上：up
+            下：down
+            左：left
+            右：right
+        2.Vue未提供别名的按键，可以使用原始键名绑定，但是多单词命名要转换为全部小写，且单词之间用-连接
+        3.系统修饰键（特殊）：ctrl、alt、shift、meta（即菜单键win）
+            （1）配合keyup使用：按下修饰键的同时按下其他键，然后释放其他键，事件触发
+            （2）配合keydown使用：正常触发
+        4.可以使用keyCode指定具体按键，或者Vue.config.keyCodes.xxx = 键码来定制别名，但不推荐，因为keyCode方法已弃用，随时失效
+
+        可在同一事件中连用多个按键表示指定按键叠加使用
+     -->
+    <div id="root">
+      <h2>欢迎{{name}}学习前端</h2>
+      <input type="text" placeholder="按下回车提示输入" @keyup.huiche.y="showInfo">
+    </div>
+  </body>
+  <script>
+    Vue.config.productionTip = false;
+    Vue.config.keyCodes.huiche = 13  // 定义了一个别名按键
+
+    const vm = new Vue({
+      el: "#root",
+      data() {
+        return {
+          name: "hmy",
+        };
+      },
+      methods: {
+        showInfo(e){
+          // console.log(e.key,e.keyCode);  // 查看按键对应的名字及编码
+            console.log(e.target.value);
+        }
+      },
+    });
+  </script>
+</html>

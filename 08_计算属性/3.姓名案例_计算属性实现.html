@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>姓名案例_计算属性实现</title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      姓：<input type="text" v-model="firstName" /><br />
+      名：<input type="text" v-model="lastName" /><br />
+      姓名：<span>{{fullName}}</span>
+    </div>
+  </body>
+  <script>
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+      el: "#root",
+      data() {
+        // data中的属性存在于vm._data中
+        return {
+          firstName:'Jackson',
+          lastName:'yao',
+        };
+      },
+      computed:{
+        // computed中的属性是计算完后把结果直接存在于vm中
+        fullName: {
+          // get的作用：当有人读取fullName时，get就被调用，且返回值就作为fullName的值
+          // get在初次读取fullName时会被调用然后产生缓存，在所依赖的数据发生变化时会再次调用
+          get () {
+            return this.firstName + '-' + this.lastName
+          },
+          // 当fullName被修改时，set被调用，计算属性要被修改就必须定义setter，且set函数必须引起计算时依赖的数据发生变动
+          set(value){
+            const arr = value.split('-')  // 把值按‘-’拆分成一个数组
+            this.firstName = arr[0]
+            this.lastName = arr[1]
+          }
+        }
+      }
+    });
+  </script>
+</html>
