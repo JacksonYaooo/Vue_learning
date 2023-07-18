@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>条件渲染</title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+      1.v-if
+        适用于：切换频率较低的场景
+        特点：不展示的dom元素直接被移除，没有节点
+      2.v-show
+        适用于：切换频率较高的场景
+        特点：通过控制display：none来控制dom元素的不展示，节点依然存在
+      3.备注
+        使用v-if时，元素可能无法获取到，而使用v-show一定可以获取到
+    -->
+
+    <div id="root">
+      <h2>当前的n值是{{n}}</h2>
+      <button @click="n++">点我n+1</button>
+      <!-- 使用v-show做条件渲染 -->
+      <!-- <h2 v-show="false">欢迎来到{{name}}</h2> -->
+      <!-- <h2 v-show="1 === 1">欢迎来到{{name}}</h2> -->
+
+      <!-- 使用v-if做条件渲染 -->
+      <!-- <h2 v-if="false">欢迎来到{{name}}</h2> -->
+      <!-- <h2 v-if="1 === 1">欢迎来到{{name}}</h2> -->
+
+      <!-- v-else和v-else-if -->
+      <!-- <div v-if="n === 1">Angular</div> -->
+      <!-- <div v-else-if="n === 2">React</div> -->
+      <!-- <div v-else-if="n === 3">Vue</div> -->
+      <!-- <div v-else>haha</div> -->
+      <!-- v-if 是符合条件即渲染，可渲染多项，
+          配合v-else-if是多选一的渲染，即值渲染最先符合条件的
+          而v-else是当以上所有的if都不符合时才去渲染，可不写 -->
+
+      <!-- template也是容器，不同于div的是它在dom中并不渲染，不破坏dom结构，它只能配合v-if而不能v-show -->
+      <template v-if="n === 1">
+        <h2>你好</h2>
+        <h2>尚硅谷</h2>
+        <h2>北京</h2>
+      </template>
+    </div>
+  </body>
+  <script>
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+      el: "#root",
+      data: {
+        name: "尚硅谷",
+        n: 0,
+      },
+    });
+  </script>
+</html>
