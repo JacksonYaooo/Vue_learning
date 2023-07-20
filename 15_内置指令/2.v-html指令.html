@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-html指令</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div>{{name}}</div>
+    <div v-html="str">我显示不出来</div> 
+  </div>
+</body>
+<script>
+  Vue.config.productionTip = false
+
+  new Vue({
+    el:'#root',
+    data:{
+      name:'hmy',
+      str:'<h3>hmy</h3>',
+    }
+  })
+</script>
+</html>

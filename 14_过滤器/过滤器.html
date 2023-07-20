@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过滤器</title>
+    <script src="../js/vue.js"></script>
+    <!-- 引入CDN链接-dayjs方法 -->
+    <script src="../js/cdn.bootcdn.net_ajax_libs_dayjs_1.11.7_dayjs.min.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>显示格式化后的时间</h2>
+      <!-- 计算属性实现 -->
+      <h3>现在是:{{fmtDate}}</h3>
+      <!-- methods实现 -->
+      <h3>现在是:{{getfmtDate()}}</h3>
+
+      <!-- 过滤器实现 -->
+      <h3>现在是:{{date | dateFormater}}</h3>
+      <!-- 过滤器实现-传参 -->
+      <h3>现在是:{{date | dateFormater('YYYY-MM-DD') | mySlice}}</h3>
+    </div>
+  </body>
+  <script>
+    Vue.config.productionTip = false;
+
+    // 全局过滤器
+    /* Vue.filter('mySlice', function(value){
+      return value.slice(0,4)
+    }) */
+
+    new Vue({
+      el: "#root",
+      data: {
+        date: 1689776029415,
+      },
+      computed: {
+        fmtDate() {
+          return dayjs(this.date).format("YYYY-MM-DD HH:mm:ss");
+        },
+      },
+      methods: {
+        getfmtDate() {
+          return dayjs(this.date).format("YYYY-MM-DD HH:mm:ss");
+        },
+      },
+      // 局部过滤器
+      filters: {
+        dateFormater(value, str = "YYYY-MM-DD HH:mm:ss") {
+          return dayjs(value).format(str);
+        },
+        mySlice(value) {
+          return value.slice(0, 4);
+        },
+      },
+    });
+  </script>
+</html>
