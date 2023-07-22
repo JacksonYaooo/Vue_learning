@@ -14,7 +14,8 @@
     <div id="root">
       <h2>当前的n值是: <span v-text="n"></span></h2>
       <h2>放大后的n值是: <span v-big="n"></span></h2>
-      <button @click="n++">点我n+1</button>
+      <button @click="n++">点我n+1</button><br>
+      <input type="text" v-fbind="n">
     </div>
   </body>
   <script>
@@ -30,7 +31,18 @@
           element.innerText = binding.value * 10;
         },
         fbind:{
-          
+          // 指令与元素成功绑定时调用
+          bind(element, binding){
+            element.value = binding.value;
+          },
+          // 指令所在元素被插入页面时调用
+          inserted(element, binding){
+            element.focus();
+          },
+          // 指令所在元模板被重新解析时调用
+          update(element, binding){
+            element.value = binding.value;
+          },
         }
       },
     });
